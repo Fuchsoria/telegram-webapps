@@ -7,7 +7,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"log"
 	"net/url"
 	"sort"
 	"strconv"
@@ -106,7 +105,6 @@ func validateDataSignature(params map[string]string, receivedHash, token string)
 	dataCheckString := createDataCheckString(params, params["auth_date"])
 	expectedHash := computeHMAC(dataCheckString, token)
 
-	fmt.Println(expectedHash, receivedHash)
 	if !hmac.Equal([]byte(expectedHash), []byte(receivedHash)) {
 		return ErrInvalidHash
 	}
